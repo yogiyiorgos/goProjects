@@ -6,6 +6,9 @@ package cmd
 
 import (
 	"fmt"
+	"io"
+	"net/http"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -16,13 +19,13 @@ var getCmd = &cobra.Command{
 	Short: "This command will get the desired Gopher",
 	Long:  `This get command will call GitHub repository in order to return the desired Gopher.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		var gopherName = "dr-who.png"
+		var gopherName = "dr-who"
 
 		if len(args) >= 1 && args[0] != "" {
 			gopherName = args[0]
 		}
 
-		URL := "https://github.com/yogiyiorgos/gophers/raw/main/" + gopherName + ".png"
+		URL := "https://github.com/scraly/gophers/raw/main/" + gopherName + ".png"
 
 		fmt.Println("Try to get '" + gopherName + "' Gopher...")
 
