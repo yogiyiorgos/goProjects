@@ -1,4 +1,4 @@
-module github.com/yogiyiorgos/go-gopher-cli
+module github.com/yogiyiorgos/goProjects/go-gopher-cli
 
 go 1.18
 

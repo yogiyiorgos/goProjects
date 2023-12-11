@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/yogiyiorgos/goProjects/bookstore-API/models"
+	"github.com/yogiyiorgos/goProjects/bookstore-API/utils"
 	"net/http"
 	"strconv"
-	"github.com/yogiyiorgos/bookstore-API/utils"
-	"github.com/yogiyiorgos/bookstore-API/models"
 )
 
 var NewBook models.Book

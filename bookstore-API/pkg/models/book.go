@@ -5,8 +5,8 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"            //GORM package for ORM functionality
-	"github.com/yogiyiorgos/pkg/config" // Custom package for handling database connection
+	"github.com/jinzhu/gorm"                                     //GORM package for ORM functionality
+	"github.com/yogiyiorgos/goProjects/bookstore-API/pkg/config" // Custom package for handling database connection
 )
 
 var db *gorm.DB // Global variable to hold the GORM db instance

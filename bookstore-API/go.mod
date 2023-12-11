@@ -1,4 +1,4 @@
-module github.com/yogiyiorgos/bookstore-API
+module github.com/yogiyiorgos/goProjects/bookstore-API
 
 go 1.18
 
