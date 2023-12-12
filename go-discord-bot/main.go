@@ -79,7 +79,67 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		if response.StatusCode == 200 {
 			_, err = s.ChannelFileSend((m.ChannelID, "dr-who.png", response.Body)
-			if err
+			if err != nil {
+				fmt.Println(err)
+			} 
+		} else {
+			fmt.Println("Error: Can't get dr-who Gopher! :-")
+		}
+	}
+
+	if m.Content == "!random" {
+		// Call the KuteGo API and retrieve a random Gopher
+		response, err := http.Get(KuteGoAPIURL + "/gopher/random/")
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer response.Body.Close()
+
+		if response.StatusCode == 200 {
+			_, err = s.ChannelFileSend(m.ChannelID, "random-gopher.png", response.body)
+			if err != nil {
+				fmt.Println("err")
+			}
+		} else {
+			fmt.Println("Error: Can't get random Gopher! :(")
+		}
+	}
+
+	if m.Content == "!gophers" {
+		// Call the KuteGo API and display the list of available Gophers
+		response, err := http.Get(KuteGoAPIURL + "/gophers/")
+		if err != nil {
+			fmt.Println(err)
+		} 
+		defer response.Body.Close()
+
+		if response.StatusCode == 200 {
+			// Transform our response to []byte
+			body, err := ioutil.ReadAll(response.Body)
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			// Put only necessary info of the JSON document in the Gopher array
+			var data []Gopher
+			err = json.Unmarshal(body, &data)
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			// Create a string with all of the Gopher's name and a blank line as separator
+			var gopher strings.Builder
+			for _, gopher := range data {
+				gophers.WriteString(gopher.Name + "\n")	
+			}
+
+			// Send a text message with the list of Gophers
+			_, err = s.ChannelMessageSend(m.ChannelID, gophers.String())
+			if err != nil {
+				fmt.Println(err)
+			}
+		} else {
+			fmt.Println("Error: Can't get list of Gopher! :-(")
 		}
 	}
 }
