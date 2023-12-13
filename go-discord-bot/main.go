@@ -19,6 +19,8 @@ var (
 	Token string
 )
 
+// KuteGO API is a REST API created specifically for the author's Gophers repo
+// It can be locally installed and run by replacing the URL below with localhost:PORT
 const KuteGoAPIURL = "https://kutego-api-xxxxx.ew.a.run.app"
 
 func init() {
@@ -122,7 +124,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			// Put only necessary info of the JSON document in the Gopher array
 			var data []Gopher
-			err = json.Unmarshal(body, &data)
+			err = json.Unmarshal(body, &data) // Unmarshal turns JSON to a Go Struct
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -139,7 +141,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 				fmt.Println(err)
 			}
 		} else {
-			fmt.Println("Error: Can't get list of Gopher! :-(")
+			fmt.Println("Error: Can't get list of Gophers! :-(")
 		}
 	}
 }
